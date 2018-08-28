@@ -1,3 +1,4 @@
+from datetime import datetime
 from app import db
 
 # inherits from db.Model class, a base class for all models
@@ -7,6 +8,8 @@ class User(db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
+    # a relationship; posts is not an actual column in the table
+    posts = db.relationship('Post', backref='author', lazy='dynamic')
 
     # __repr__ is a built-in function to compute the official 
     # string representation of an object
@@ -18,3 +21,12 @@ class User(db.Model):
     # >>> u 
     # <User susan>
 
+class Post(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    body = db.Column(db.String(140))
+    # datetime.utcnow() returns: 2018-08-26 08:29:16.511177
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __repr__(self):
+        return '<Post {}>'.format(self.body)
