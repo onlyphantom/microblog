@@ -11,17 +11,20 @@ class User(db.Model):
     # a relationship; posts is not an actual column in the table
     posts = db.relationship('Post', backref='author', lazy='dynamic')
 
-    # __repr__ is a built-in function to compute the official 
+    # __repr__ is a built-in function to compute the official
     # string representation of an object
     def __repr__(self):
         return '<User {}>'.format(self.username)
-    # in REPL: 
+    # in REPL:
     # >>> from app.models import User
     # >>> u = User(username = 'susan', email='susan@example.com')
-    # >>> u 
+    # >>> u
     # <User susan>
 
 class Post(db.Model):
+    """Model for posts.
+    :param db.Model: Create Posts
+    """
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(140))
     # datetime.utcnow() returns: 2018-08-26 08:29:16.511177

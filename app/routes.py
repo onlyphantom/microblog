@@ -1,5 +1,5 @@
-from flask import (flash, redirect, render_template, 
-url_for)
+from flask import (flash, redirect, render_template,
+                   url_for)
 from app import app
 from app.forms import LoginForm
 
@@ -10,11 +10,11 @@ def index():
     posts = [
         {
             'author': {'username': 'John'},
-            'body': 'Beautiful day in Portland!' 
+            'body': 'Beautiful day in Portland!'
         },
         {
             'author': {'username': 'Susan'},
-            'body': 'The Avengers movie was so cool!'    
+            'body': 'The Avengers movie was so cool!'
         }
     ]
     return render_template('index.html', title='Home', user=user, posts=posts)
@@ -23,10 +23,10 @@ def index():
 def login():
     # instantiate an object from the LoginForm class
     form = LoginForm()
-    
+
     if form.validate_on_submit():
         flash('Login requested for user {}, remember me={}'.format(
             form.username.data, form.remember_me.data
         ))
-        return redirect(url_for('index'))    
+        return redirect(url_for('index'))
     return render_template('login.html', title='Sign In', form=form)
