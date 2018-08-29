@@ -9,6 +9,10 @@ class User(db.Model):
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     # a relationship; posts is not an actual column in the table
+    # allow us to do things like:
+    # posts = Post.query.all()
+    # for p in posts:
+    #   print(p.id, p.author.username, p.author.email, p.body)
     posts = db.relationship('Post', backref='author', lazy='dynamic')
 
     # __repr__ is a built-in function to compute the official
