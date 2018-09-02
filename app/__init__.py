@@ -12,6 +12,9 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login = LoginManager(app)
 
+# let Flask-Login know which page (function name) handles login
+login.login_view = 'login'
+
 # Import at the bottom to workaround circular imports;
 # Routes module needs to import the app variable defined in
 # this script, so putting the reciprocal imports at the

@@ -33,6 +33,7 @@ class User(UserMixin, db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+
 class Post(db.Model):
     """Model for posts.
     :param db.Model: Create Posts
@@ -47,5 +48,5 @@ class Post(db.Model):
         return '<Post {}>'.format(self.body)
 
 @login.user_loader
-def load_user(id):
-    return User.query.get(int(id))
+def load_user(userid):
+    return User.query.get(int(userid))
