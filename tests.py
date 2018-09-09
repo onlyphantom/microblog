@@ -85,5 +85,6 @@ class UserModelClass(unittest.TestCase):
         self.assertEqual(f4, [p4])
 
 
+# to test, in Python console: python tests.py
 if __name__ == '__main__':
     unittest.main(verbosity=2)
