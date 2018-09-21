@@ -97,7 +97,8 @@ def user(username):
         'user', username=this_user.username, page=posts.next_num) if posts.has_next else None
     prev_url = url_for(
         'user', username=this_user.username, page=posts.prev_num) if posts.has_prev else None
-    return render_template('user.html', user=this_user, posts=posts.items, next_url=next_url, prev_url=prev_url)
+    return render_template('user.html', user=this_user, posts=posts.items, next_url=next_url,
+                           prev_url=prev_url)
 
 
 @app.route('/edit_profile', methods=['GET', 'POST'])
